@@ -3,7 +3,7 @@ import { DataGridPro } from "@mui/x-data-grid-pro";
 import EditIcon from "@mui/icons-material/Edit";
 import BuildIcon from "@mui/icons-material/Build";
 import AddIcon from "@mui/icons-material/Add";
-import DeleteIcon from '@mui/icons-material/Delete';
+import DeleteIcon from "@mui/icons-material/Delete";
 import Button from "@mui/material/Button";
 import axios from "axios";
 
