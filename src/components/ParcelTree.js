@@ -4,6 +4,7 @@ import EditIcon from "@mui/icons-material/Edit";
 import BuildIcon from "@mui/icons-material/Build";
 import AddIcon from "@mui/icons-material/Add";
 import DeleteIcon from "@mui/icons-material/Delete";
+import Tooltip from "@mui/material/Tooltip";
 import Button from "@mui/material/Button";
 import axios from "axios";
 
@@ -12,21 +13,33 @@ const columns = [
     field: "actions",
     headerName: "Actions",
     width: 300,
-    renderCell: () => {
+    renderCell: (param) => {
       return (
         <>
-          <Button>
-            <AddIcon></AddIcon>
-          </Button>
-          <Button>
-            <EditIcon></EditIcon>
-          </Button>
-          <Button>
-            <BuildIcon></BuildIcon>
-          </Button>
-          <Button>
-            <DeleteIcon></DeleteIcon>
-          </Button>
+          <Tooltip title="Add">
+            <Button>
+              <AddIcon></AddIcon>
+            </Button>
+          </Tooltip>
+          <Tooltip title="Page Edit">
+            <Button>
+              <EditIcon></EditIcon>
+            </Button>
+          </Tooltip>
+          <Tooltip title="Parcel Edit">
+            <Button>
+              <BuildIcon></BuildIcon>
+            </Button>
+          </Tooltip>
+          {param.rowNode.type === "leaf" ? (
+            <Tooltip title="Delete">
+              <Button>
+                <DeleteIcon></DeleteIcon>
+              </Button>
+            </Tooltip>
+          ) : (
+            <></>
+          )}
         </>
       );
     },
@@ -50,7 +63,6 @@ const getTreeDataPath = (row) => row.hierarchy;
 
 export default function ParcelTree() {
   const [gridRows, setGridRows] = useState([]);
-
 
   useEffect(() => {
     axios.get("http://localhost:3000/menu/types").then((response) => {
